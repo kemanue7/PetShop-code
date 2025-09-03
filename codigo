@@ -1,0 +1,126 @@
+using System;
+using System.Collections.Generic;
+
+class Program {
+  public static void Main (string[] args) {
+    
+    // Criando o PetShop
+    PetShop meuPetShop = new PetShop();
+
+
+    // Criando alguns animais
+    cachorro patixa = new cachorro("Kaio", "corji", 21);
+    gato andressa = new gato("urach", "Loira", 37);
+    papagaio LoroJose = new papagaio("Ana Maria Braga", "verde", "sul", 16);
+
+    // Adicionando ao PetShop
+    meuPetShop.AdicionarAnimal(patixa);
+    meuPetShop.AdicionarAnimal(andressa);
+    meuPetShop.AdicionarAnimal(LoroJose);
+
+    // Listando todos os animais do PetShop
+    meuPetShop.ListarAnimais();
+  }
+}
+// Clase principal 
+public class animal {
+    public int Idade;
+    public string Nome;
+
+    // Contrutor da classe principal
+    public animal(string n, int i) {
+        Nome = n;
+        Idade = i;
+    }
+
+    // Imprime o som generico
+    public virtual void EmitirSom() {
+        Console.WriteLine("cocorico");
+    }
+
+    // Exibe informações genericas
+    public virtual void ExibirInfo() {
+        Console.WriteLine($"A idade do {Nome} é {Idade}");
+    }     
+}
+
+// Classe cachoro, herda da classe animal, adiciona um novo som e uma raça 
+public class cachorro : animal {
+    public string raça;
+  
+    // Construtor do cachorro
+    public cachorro(string n, string r, int i) : base(n, i) {
+        raça = r;
+    }
+
+    // Som que o cachorro faz
+    public override void EmitirSom() {
+        Console.WriteLine("Ele faz auau");
+    }
+
+    // Informações do cachorro
+    public override void ExibirInfo() {
+        Console.WriteLine($"A {Nome} tem {Idade} anos de idade e é da raça {raça}");
+    }
+}
+
+// Classe gato, herda da classe animal, adiciona um novo som e uma cor
+public class gato : animal {
+    public string cor;
+
+    // Construtor do gato
+    public gato(string n, string c, int i) : base(n, i) {
+        cor = c;
+    }
+
+    // Som que o gato faz
+    public override void EmitirSom() {
+        Console.WriteLine("Ele faz miau");
+    }
+
+    // Informações do gato
+    public override void ExibirInfo() {
+        Console.WriteLine($"A {Nome} tem {Idade} de idade e é da cor {cor}");
+    }
+}
+
+// Classe papagaio, herda da classe animal, adiciona um novo som , uma cor e origem
+public class papagaio : animal {
+  public string cor;
+  public string origem;
+
+  // Construtor do papagaio
+  public papagaio(string n, string c, string o, int i) : base(n, i) {
+      cor = c;
+      origem = o;
+  }
+  // Som que o papagaio faz
+  public override void EmitirSom() {
+      Console.WriteLine("Ele faz Curupaco curupaco");
+  }
+
+  // Informações do papagaio
+  public override void ExibirInfo() {
+      Console.WriteLine($"A {Nome} tem {Idade} anos de idade, tem a cor {cor} e veio do {origem}");
+  }
+}
+// Classe petshop, lista de animais
+class PetShop {
+    public List<animal> animais = new List<animal>();
+
+    // Adiciona animais a lista petshop
+    public void AdicionarAnimal(animal a) {
+        animais.Add(a);
+        Console.WriteLine($"{a.Nome} foi adicionado ao PetShop!\n");
+    }
+
+    // Lista animais da lista petshop
+    public void ListarAnimais() {
+        Console.WriteLine("\nAnimais cadastrados no PetShop:\n");
+        foreach (animal a in animais) {
+            a.ExibirInfo();
+            a.EmitirSom();
+            Console.WriteLine("-------------------\n");
+        }
+    }
+}
